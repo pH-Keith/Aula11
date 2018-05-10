@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 
 namespace Aula11
 {
@@ -8,7 +9,7 @@ namespace Aula11
     public class Bag : IStuff
     {
         /// <summary>Array que contém os itens da mochila</summary>
-        private IStuff[] stuff;
+        private ArrayList stuff;
 
         /// <summary>Número de itens na mochila</summary>
         public int StuffCount { get; private set; }
@@ -61,7 +62,7 @@ namespace Aula11
         /// </param>
         public Bag(int bagSize)
         {
-            stuff = new IStuff[bagSize];
+            stuff = new ArrayList(bagSize);
             StuffCount = 0;
         }
 
@@ -70,7 +71,8 @@ namespace Aula11
         public void AddThing(IStuff aThing)
         {
             // Será que temos espaço na mochila?
-            if (StuffCount >= stuff.Length)
+            int temp = stuff.Capacity;
+            if (StuffCount >= temp)
             {
                 // Senão tivermos podemos "lançar" uma exceção
                 throw new InvalidOperationException("Bag is already full!");
@@ -78,7 +80,9 @@ namespace Aula11
 
             // Adicionar o item à mochila e depois incrementar o
             // número de coisas na mochila
-            stuff[StuffCount++] = aThing;
+            stuff.Add(aThing);
+            StuffCount++;
+
         }
 
         /// <summary>Observar um item da mochila sem o remover da mesma</summary>
@@ -92,7 +96,7 @@ namespace Aula11
                 throw new InvalidOperationException(
                     "Bag doesn't have that much stuff!");
             }
-            return stuff[index];
+            return (IStuff)stuff[index];
         }
 
         /// <summary>

@@ -30,6 +30,8 @@ namespace Aula11
             p.BagOfStuff2.AddThing(new Food(FoodType.Meat, 1, 0.200f));
             // Meat with 4 days and 800 grams
             p.BagOfStuff2.AddThing(new Food(FoodType.Meat, 4, 0.800f));
+
+            p.BagOfStuff.AddThing(p.BagOfStuff2);
             // Pão com 2 dias, 500 gramas
             p.BagOfStuff.AddThing(new Food(FoodType.Bread, 2, 0.500f));
             // 300 gramas de vegetais com 5 dias
@@ -57,10 +59,13 @@ namespace Aula11
                     (aThing as Gun).Shoot();
                 }
             }
+            Console.WriteLine(p.BagOfStuff);
+            /*
+            Console.WriteLine("The Second bag has: ");
 
-            for (int i = 0; i < p.BagOfStuff.StuffCount; i++)
+            for (int i = 0; i < p.BagOfStuff2.StuffCount; i++)
             {
-                IStuff aThing = p.BagOfStuff.GetThing(i);
+                IStuff aThing = p.BagOfStuff2.GetThing(i);
                 Console.WriteLine($"\t=> {aThing}");
 
                 // Se item atual for uma arma, disparar a mesma
@@ -70,7 +75,8 @@ namespace Aula11
                 }
             }
             // Mostrar de novo informação sobre a mochila
-            Console.WriteLine(p.BagOfStuff);
+            Console.WriteLine(p.BagOfStuff2);
+            */
         }
     }
 }
